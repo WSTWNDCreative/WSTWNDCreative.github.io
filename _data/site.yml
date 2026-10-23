@@ -1,37 +1,36 @@
-# All the words on wstwndcreative.github.io live here.
-# Edit them in Pages CMS (app.pagescms.org) or right here on GitHub.
-# Wrap a word in *asterisks* in a heading to make it italic (one word per heading looks best).
-
 page:
   title: WSTWND Creative
-  description: We make documentary-style films for small businesses, non-profits and couples, then host watch parties with your community.
-
+  description: We make documentary-style films for small businesses, non-profits
+    and couples, then host watch parties with your community.
 header:
   tag: Films + watch parties
   link_label: Say hello
-
 hero:
   eyebrow: WSTWND Creative
   headline: First we make the film, then we *host* the premiere.
-  intro: Documentary-style films for small businesses, non-profits and couples, followed by a watch party that puts everyone you care about in one room. Popcorn's a must. 
+  intro: Documentary-style films for small businesses, non-profits and couples,
+    followed by a watch party that puts everyone you care about in one room.
+    Popcorn's a must.
   primary_button: Start a film
   secondary_button: How it works
   reel_video: /media/reel.mp4
   reel_poster: /media/reel-poster.jpg
-  reel_label: The reel · 0:10
-  reel_description: "WSTWND teaser reel: a sun rises over a film strip, then the line 'Pioneering intentional media.'"
-
+  reel_label: isnt our logo so pretty · 0:10
+  reel_description: "WSTWND teaser reel: a sun rises over a film strip, then the
+    line 'Pioneering intentional media.'"
 how_it_works:
   show: true
   eyebrow: How it works
   heading: Two parts. One very good night.
   steps:
     - title: We film it
-      text: We spend time understanding you/your organization, in your space. 
+      text: "We spend time getting to know you and your values. Documenting it is
+        simple. There's no script. Just be you. "
     - title: We host the watch party
-      text: "Then we premiere it. We set up the screen and the room, and you invite the people who matter: customers, donors, family, and the neighbour who keeps asking what it is you actually do."
+      text: "Then we premiere it. We set up the screen and the room, and you invite
+        the people who matter: customers, donors, family, and the neighbour who
+        keeps asking what it is you actually do."
   closing: You keep the film. Your community keeps talking about the night.
-
 who_its_for:
   show: true
   eyebrow: Who we make films for
@@ -39,19 +38,24 @@ who_its_for:
   cards:
     - label: For businesses
       title: Small & medium businesses
-      text: Celebrate the people behind the scenes. A film and a launch night turn regulars into fans, and strangers into regulars.
+      text: "Celebrate the people behind the scenes. Your community is your strongest
+        marketing. "
     - label: For non-profits
       title: Non-profits
-      text: Your impact is easier to feel than to explain in an annual report. Screen it for donors and volunteers and let the room do the talking.
+      text: Your impact is easier to feel than to explain in an annual report. Screen
+        it for donors and volunteers and let the room do the talking.
     - label: For couples
       title: Wedding films
-      text: "Shot like a documentary: your voices, your families, the bits nobody rehearsed. Then a watch party, so everyone gets to relive it with you."
-
+      text: "Shot like a documentary: you, your families, the bits nobody rehearsed.
+        Then a watch party, so everyone gets to relive it with you."
 watch_party:
   show: true
   eyebrow: The watch party
   heading: The premiere is the *point*.
-  text: A film sitting in a Google Drive folder doesn't do much. The same film on a big screen, with your community in the room, starts conversations, gets shared, and brings people back. We run the screening so you get to enjoy it.
+  text: "A film sitting in a Google Drive folder doesn't do much. The same film on
+    a big screen, with your community in the room, creates memories, gets
+    shared, and brings people back. We run the screening so you get to enjoy the
+    work it took to get there. "
   ticket_top: WSTWND presents
   ticket_headline: ADMIT ALL
   ticket_stub: World premiere
@@ -62,10 +66,9 @@ watch_party:
       value: Everyone
     - label: Date
       value: You pick
-
 contact:
   heading: Let's make something *worth* watching.
-  text: Email us with who you are, who your people are, and what you have in mind. A couple of lines is plenty.
+  text: "Email us with what you have in mind. "
   email: wstwndcreative@gmail.com
   copy_button: Copy email
   copied_message: Copied. Talk soon.
