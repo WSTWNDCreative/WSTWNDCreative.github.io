@@ -65,14 +65,6 @@ watch_party:
       value: Everyone
     - label: Date
       value: You pick
-contact:
-  heading: Let's make something *worth* watching.
-  text: "Email us with what you have in mind. "
-  email: wstwndcreative@gmail.com
-  copy_button: Copy email
-  copied_message: Copied. Talk soon.
-  footer_left: © 2026 WSTWND Creative
-  footer_right: Films + watch parties
 projects:
   show: true
   eyebrow: Our work
@@ -83,11 +75,21 @@ projects:
       title: "Q&A: Mustafa & Nirjona"
       category: Wedding film
       year: "2026"
-      summary: A documentary-style film about a couple in the week before their wedding, told in their own words, then premiered for their families.
+      summary: A documentary-style film about a couple in the week before their
+        wedding, told in their own words, then premiered for their families.
       cover: /media/projects/nirjona-mustafa-10-questions.jpg
-      cover_alt: "Title card reading '10 Questions With Nirjona & Mustafa': the couple smiling under a floral arch at the bridal shower."
-      quote: Till now our motto has kinda been go with the flow, and it's gotten us thus far.
+      cover_alt: "Title card reading '10 Questions With Nirjona & Mustafa': the couple
+        smiling under a floral arch at the bridal shower."
+      quote: Till now our motto has been go with the flow, and it's gotten us thus
+        far.
       quote_by: The groom
       film_link: https://www.youtube.com/watch?v=tz3e3OVEYOc
-      video: ""
       film_link_label: Watch the film
+contact:
+  heading: Let's make something *worth* watching.
+  text: "Email us with what you have in mind. "
+  email: wstwndcreative@gmail.com
+  copy_button: Copy email
+  copied_message: Copied. Talk soon.
+  footer_left: © 2026 WSTWND Creative
+  footer_right: Films + watch parties
