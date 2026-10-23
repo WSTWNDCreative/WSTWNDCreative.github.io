@@ -130,7 +130,13 @@ content:
               - { name: cover_alt, label: Describe the cover image (for screen readers), type: string }
               - { name: quote, label: Quote from the people in the film (optional), type: text }
               - { name: quote_by, label: Who said it (optional), type: string }
-              - { name: film_link, label: "Link to the full film, e.g. YouTube or Vimeo (optional)", type: string }
+              - { name: film_link, label: "YouTube or Vimeo link (plays on the page when someone clicks the cover)", type: string }
+              - name: video
+                label: "Or a short clip to play on the page (MP4 under ~25 MB, e.g. a 30-second teaser; used only if there's no YouTube/Vimeo link)"
+                type: file
+                options:
+                  path: media/projects
+                  categories: [video]
               - { name: film_link_label, label: Link text, type: string }
 
       - name: contact

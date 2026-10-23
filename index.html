@@ -125,7 +125,15 @@ p { margin: 0; max-width: 62ch; }
 /* projects */
 .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: clamp(32px, 4vw, 56px); }
 .project { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-.project img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; background: var(--ink); }
+.frame { position: relative; width: 100%; max-width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: var(--ink); }
+.frame img, .frame video, .frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+.frame video { object-fit: contain; background: var(--ink); }
+.play { all: unset; position: absolute; inset: 0; cursor: pointer; display: block; }
+.play:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.play-icon { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; transition: transform .2s ease; }
+.play-icon svg { width: 30px; height: 30px; fill: var(--ink); margin-left: 4px; }
+.play:hover .play-icon { transform: scale(1.08); }
+@media (prefers-reduced-motion: reduce) { .play-icon { transition: none; } .play:hover .play-icon { transform: none; } }
 .project-text { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .project .meta { margin-top: 6px; }
 .project:only-child { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
@@ -260,8 +268,24 @@ p { margin: 0; max-width: 62ch; }
       <div class="projects">
         {%- for p in s.projects.items %}{% if p.show %}
         <article class="project">
-          {%- if p.cover and p.cover != "" %}
-          <img src="{{ p.cover | relative_url }}" alt="{{ p.cover_alt | escape }}" loading="lazy" width="1280" height="720">
+          {%- assign link = p.film_link | default: "" | strip -%}
+          {%- assign embeddable = false -%}
+          {%- if link contains "youtube.com" or link contains "youtu.be" or link contains "vimeo.com" -%}{%- assign embeddable = true -%}{%- endif -%}
+          {%- if embeddable %}
+          <div class="frame">
+            <button class="play" type="button" data-film="{{ link | escape }}" aria-label="Play {{ p.title | escape }}">
+              {%- if p.cover and p.cover != "" %}<img src="{{ p.cover | relative_url }}" alt="" loading="lazy" width="1280" height="720">{% endif %}
+              <span class="play-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+            </button>
+          </div>
+          {%- elsif p.video and p.video != "" %}
+          <div class="frame">
+            <video controls playsinline preload="none"{% if p.cover and p.cover != "" %} poster="{{ p.cover | relative_url }}"{% endif %} aria-label="{{ p.title | escape }}">
+              <source src="{{ p.video | relative_url }}" type="video/mp4">
+            </video>
+          </div>
+          {%- elsif p.cover and p.cover != "" %}
+          <div class="frame"><img src="{{ p.cover | relative_url }}" alt="{{ p.cover_alt | escape }}" loading="lazy" width="1280" height="720"></div>
           {%- endif %}
           <div class="project-text">
           <span class="label meta">{{ p.category | escape }}{% if p.year and p.year != "" %} · {{ p.year | escape }}{% endif %}</span>
@@ -275,7 +299,7 @@ p { margin: 0; max-width: 62ch; }
             {%- if p.quote_by and p.quote_by != "" %}<span class="label">{{ p.quote_by | escape }}</span>{% endif %}
           </blockquote>
           {%- endif %}
-          {%- if p.film_link and p.film_link != "" %}
+          {%- if link != "" %}
           <a class="label watch" href="{{ p.film_link | escape }}" target="_blank" rel="noopener">{{ p.film_link_label | default: "Watch the film" | escape }} &rarr;</a>
           {%- endif %}
           </div>
@@ -357,6 +381,32 @@ p { margin: 0; max-width: 62ch; }
     var done = function () { note.textContent = copyBtn.getAttribute('data-copied'); };
     var fail = function () { selectAddr(); note.textContent = 'Selected. Press Ctrl+C or Cmd+C to copy.'; };
     try { navigator.clipboard.writeText(text).then(done, fail); } catch (e) { fail(); }
+  });
+
+  // Projects: swap the cover for the YouTube/Vimeo player on click
+  function embedUrl(url) {
+    try {
+      var u = new URL(url), host = u.hostname.replace(/^www\.|^m\./, ''), id = '';
+      if (host === 'youtu.be') id = u.pathname.slice(1).split('/')[0];
+      else if (host.indexOf('youtube.com') > -1) id = u.searchParams.get('v') || (u.pathname.match(/\/(?:shorts|embed|live)\/([^/?]+)/) || [])[1] || '';
+      if (id) return 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&modestbranding=1';
+      if (host.indexOf('vimeo.com') > -1) {
+        var m = u.pathname.match(/(\d+)(?:\/([0-9a-f]+))?/);
+        if (m) return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1' + (m[2] ? '&h=' + m[2] : '') + (u.searchParams.get('h') ? '&h=' + u.searchParams.get('h') : '');
+      }
+    } catch (e) {}
+    return null;
+  }
+  document.querySelectorAll('.play').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var src = embedUrl(btn.getAttribute('data-film'));
+      if (!src) { window.open(btn.getAttribute('data-film'), '_blank', 'noopener'); return; }
+      var f = document.createElement('iframe');
+      f.src = src; f.title = btn.getAttribute('aria-label');
+      f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+      f.allowFullscreen = true;
+      btn.parentNode.replaceChild(f, btn);
+    });
   });
 })();
 </script>
