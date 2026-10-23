@@ -121,6 +121,22 @@ p { margin: 0; max-width: 62ch; }
 .copied { min-height: 1.4em; }
 .foot { margin-top: clamp(56px, 8vw, 96px); padding-top: 22px; border-top: 1.5px solid var(--surface); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
+
+/* projects */
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: clamp(32px, 4vw, 56px); }
+.project { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.project img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; background: var(--ink); }
+.project-text { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.project .meta { margin-top: 6px; }
+.project:only-child { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
+.project:only-child .meta { margin-top: 0; }
+@media (max-width: 900px) { .project:only-child { grid-template-columns: minmax(0, 1fr); } }
+.project blockquote { margin: 6px 0 0; padding-left: 18px; border-left: 4px solid var(--sunset-clay); display: flex; flex-direction: column; gap: 8px; }
+.project blockquote p { font-family: var(--display); font-style: italic; font-weight: 300; font-size: 22px; line-height: 1.35; }
+.project .watch { align-self: flex-start; text-decoration: none; border-bottom: 1.5px solid var(--ink); padding-bottom: 2px; }
+.project .watch:hover { border-bottom-color: transparent; }
+.work-intro { margin-top: -8px; }
+
 @media (max-width: 900px) {
   .hero .wrap, .party .wrap { grid-template-columns: minmax(0, 1fr); }
   .reel { max-width: 300px; }
@@ -224,6 +240,47 @@ p { margin: 0; max-width: 62ch; }
           <p>{{ card.text | escape }}</p>
         </article>
         {%- endfor %}
+      </div>
+    </div>
+  </section>
+  {%- endif %}
+
+  {%- assign project_count = 0 -%}
+  {%- for p in s.projects.items -%}{%- if p.show -%}{%- assign project_count = project_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+  {%- if s.projects.show and project_count > 0 %}
+  <section class="band section" id="work" aria-labelledby="work-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="label">{{ s.projects.eyebrow | escape }}</span>
+        <h2 id="work-title">{{ s.projects.heading | markdownify | remove: '<p>' | remove: '</p>' | strip }}</h2>
+        {%- if s.projects.intro and s.projects.intro != "" %}
+        <p class="lede work-intro">{{ s.projects.intro | escape }}</p>
+        {%- endif %}
+      </div>
+      <div class="projects">
+        {%- for p in s.projects.items %}{% if p.show %}
+        <article class="project">
+          {%- if p.cover and p.cover != "" %}
+          <img src="{{ p.cover | relative_url }}" alt="{{ p.cover_alt | escape }}" loading="lazy" width="1280" height="720">
+          {%- endif %}
+          <div class="project-text">
+          <span class="label meta">{{ p.category | escape }}{% if p.year and p.year != "" %} · {{ p.year | escape }}{% endif %}</span>
+          <h3>{{ p.title | escape }}</h3>
+          {%- if p.summary and p.summary != "" %}
+          <p>{{ p.summary | escape }}</p>
+          {%- endif %}
+          {%- if p.quote and p.quote != "" %}
+          <blockquote>
+            <p>&ldquo;{{ p.quote | escape }}&rdquo;</p>
+            {%- if p.quote_by and p.quote_by != "" %}<span class="label">{{ p.quote_by | escape }}</span>{% endif %}
+          </blockquote>
+          {%- endif %}
+          {%- if p.film_link and p.film_link != "" %}
+          <a class="label watch" href="{{ p.film_link | escape }}" target="_blank" rel="noopener">{{ p.film_link_label | default: "Watch the film" | escape }} &rarr;</a>
+          {%- endif %}
+          </div>
+        </article>
+        {%- endif %}{% endfor %}
       </div>
     </div>
   </section>

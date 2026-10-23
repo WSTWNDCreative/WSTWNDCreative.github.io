@@ -101,6 +101,38 @@ content:
               - { name: label, label: Label, type: string }
               - { name: value, label: Value, type: string }
 
+      - name: projects
+        label: Our work (projects)
+        type: object
+        fields:
+          - { name: show, label: Show this section (it also hides itself when no project is switched on), type: boolean }
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: "Heading (*asterisks* for italics)", type: string }
+          - { name: intro, label: Intro line (leave empty to hide), type: string }
+          - name: items
+            label: Projects (shown in this order)
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title} ({category}, {year})"
+            fields:
+              - { name: show, label: Show on the site, type: boolean }
+              - { name: title, label: Project title, type: string }
+              - { name: category, label: "Type (e.g. Wedding film, Non-profit, Small business)", type: string }
+              - { name: year, label: Year, type: string }
+              - { name: summary, label: Short description (1-2 sentences), type: text }
+              - name: cover
+                label: Cover image (landscape, about 1280x720)
+                type: image
+                options:
+                  path: media/projects
+              - { name: cover_alt, label: Describe the cover image (for screen readers), type: string }
+              - { name: quote, label: Quote from the people in the film (optional), type: text }
+              - { name: quote_by, label: Who said it (optional), type: string }
+              - { name: film_link, label: "Link to the full film, e.g. YouTube or Vimeo (optional)", type: string }
+              - { name: film_link_label, label: Link text, type: string }
+
       - name: contact
         label: Contact (dark section at the bottom)
         type: object

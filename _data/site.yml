@@ -73,3 +73,20 @@ contact:
   copied_message: Copied. Talk soon.
   footer_left: © 2026 WSTWND Creative
   footer_right: Films + watch parties
+projects:
+  show: true
+  eyebrow: Our work
+  heading: Films we've *made*.
+  intro: A few of the people we've had the privilege of filming.
+  items:
+    - show: false
+      title: The Mehendi
+      category: Wedding film
+      year: "2026"
+      summary: A documentary-style film about a couple in the week before their wedding, told in their own words, then premiered for their families.
+      cover: /media/projects/mehendi-cover.jpg
+      cover_alt: The bride smiling, seated on the grass beside a river on a sunny afternoon.
+      quote: Till now our motto has kinda been go with the flow, and it's gotten us thus far.
+      quote_by: The groom
+      film_link: ""
+      film_link_label: Watch the film
