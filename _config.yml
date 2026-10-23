@@ -1,0 +1,5 @@
+title: WSTWND Creative
+url: "https://wstwndcreative.github.io"
+exclude:
+  - README.md
+  - .pages.yml

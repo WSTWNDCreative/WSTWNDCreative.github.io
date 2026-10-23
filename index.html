@@ -1,15 +1,18 @@
+---
+# Content comes from _data/site.yml. Edit words there (or in Pages CMS), not here.
+---
+{%- assign s = site.data.site -%}
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta property="og:title" content="WSTWND Creative">
-<meta property="og:description" content="We film your people. Then we throw the premiere.">
-<meta property="og:image" content="reel-poster.jpg">
-<title>WSTWND Creative</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Documentary-style films for small businesses, non-profits and couples, followed by a watch party for your people.">
+<title>{{ s.page.title | escape }}</title>
+<meta name="description" content="{{ s.page.description | escape }}">
+<meta property="og:title" content="{{ s.page.title | escape }}">
+<meta property="og:description" content="{{ s.page.description | escape }}">
+<meta property="og:image" content="{{ s.hero.reel_poster | absolute_url }}">
+<link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600&family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
@@ -83,13 +86,13 @@ p { margin: 0; max-width: 62ch; }
 .rule { height: 0; border-top: 1.5px solid var(--ink); }
 
 /* how it works: a real sequence */
-.steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); list-style: none; margin: 0; padding: 0; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(24px, 4vw, 56px); list-style: none; margin: 0; padding: 0; }
 .step { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 6px solid var(--golden-hour); min-width: 0; }
 .step .num { font-family: var(--display); font-weight: 300; font-size: 64px; line-height: 1; font-variation-settings: "opsz" 48; }
 .then { margin-top: clamp(28px, 4vw, 44px); }
 
 /* audiences */
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
 .card { border: 1.5px solid var(--ink); border-top: 8px solid var(--faded-lake); border-radius: 16px; padding: 28px 26px 30px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 
 /* watch party */
@@ -137,11 +140,9 @@ p { margin: 0; max-width: 62ch; }
 </style>
 </head>
 <body>
-
-
 <header class="band top">
   <div class="wrap">
-    <span class="label tag">Films + watch parties</span>
+    <span class="label tag">{{ s.header.tag | escape }}</span>
     <a href="#top" aria-label="WSTWND home">
       <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="270 360 660 500" role="img" aria-label="WSTWND">
         <defs><clipPath id="sun-a"><rect x="0" y="0" width="1200" height="635"/></clipPath></defs>
@@ -154,7 +155,7 @@ p { margin: 0; max-width: 62ch; }
         <text x="278" y="845" font-family="Fraunces, serif" font-weight="300" font-size="138" fill="#2E2A26" textLength="644" lengthAdjust="spacing" style="font-variation-settings:'opsz' 144">WSTWND</text>
       </svg>
     </a>
-    <a class="label say" href="#contact">Say hello</a>
+    <a class="label say" href="#contact">{{ s.header.link_label | escape }}</a>
   </div>
 </header>
 
@@ -162,96 +163,95 @@ p { margin: 0; max-width: 62ch; }
   <section class="band hero" aria-labelledby="hero-title">
     <div class="wrap">
       <div class="hero-copy">
-        <span class="label">WSTWND Creative</span>
-        <h1 id="hero-title">We film your people. Then we <em>throw</em> the premiere.</h1>
-        <p class="lede">Documentary-style films for small businesses, non-profits and couples, followed by a watch party that puts everyone you care about in one room. Popcorn optional. Happy tears likely.</p>
+        <span class="label">{{ s.hero.eyebrow | escape }}</span>
+        <h1 id="hero-title">{{ s.hero.headline | markdownify | remove: '<p>' | remove: '</p>' | strip }}</h1>
+        <p class="lede">{{ s.hero.intro | escape }}</p>
         <div class="ctas">
-          <a class="btn solid" href="#contact">Start a film</a>
-          <a class="btn ghost" href="#how">How it works</a>
+          <a class="btn solid" href="#contact">{{ s.hero.primary_button | escape }}</a>
+          {%- if s.how_it_works.show %}
+          <a class="btn ghost" href="#how">{{ s.hero.secondary_button | escape }}</a>
+          {%- endif %}
         </div>
       </div>
       <figure class="reel" style="margin:0">
-        <video id="reel" autoplay muted loop playsinline preload="auto" poster="reel-poster.jpg" aria-label="WSTWND teaser reel: a sun rises over a film strip, then the line 'Pioneering intentional media.'">
-          <source src="reel.mp4" type="video/mp4">
+        <video id="reel" autoplay muted loop playsinline preload="auto" poster="{{ s.hero.reel_poster | relative_url }}" aria-label="{{ s.hero.reel_description | escape }}">
+          <source src="{{ s.hero.reel_video | relative_url }}" type="video/mp4">
         </video>
         <figcaption class="reel-bar label">
-          <span>The reel · 0:10</span>
+          <span>{{ s.hero.reel_label | escape }}</span>
           <button type="button" id="reel-toggle" aria-pressed="false">Pause</button>
         </figcaption>
       </figure>
     </div>
   </section>
 
+  {%- if s.how_it_works.show %}
   <section class="band section" id="how" aria-labelledby="how-title">
     <div class="wrap">
       <div class="section-head">
-        <span class="label">How it works</span>
-        <h2 id="how-title">Two parts. One very good night.</h2>
+        <span class="label">{{ s.how_it_works.eyebrow | escape }}</span>
+        <h2 id="how-title">{{ s.how_it_works.heading | markdownify | remove: '<p>' | remove: '</p>' | strip }}</h2>
       </div>
       <ol class="steps">
+        {%- for step in s.how_it_works.steps %}
         <li class="step">
-          <span class="num" aria-hidden="true">1</span>
-          <h3>We film it</h3>
-          <p>We spend time with you and your people, in your space. Interviews, natural sound, the moments nobody planned. No stock smiles, no teleprompter. The story comes from the people telling it.</p>
+          <span class="num" aria-hidden="true">{{ forloop.index }}</span>
+          <h3>{{ step.title | escape }}</h3>
+          <p>{{ step.text | escape }}</p>
         </li>
-        <li class="step">
-          <span class="num" aria-hidden="true">2</span>
-          <h3>We host the watch party</h3>
-          <p>Then we premiere it. We set up the screen and the room, and you invite the people who matter: customers, donors, family, and the neighbour who keeps asking what it is you actually do.</p>
-        </li>
+        {%- endfor %}
       </ol>
-      <p class="then lede">You keep the film. Your community keeps talking about the night.</p>
+      {%- if s.how_it_works.closing and s.how_it_works.closing != "" %}
+      <p class="then lede">{{ s.how_it_works.closing | escape }}</p>
+      {%- endif %}
     </div>
   </section>
+  {%- endif %}
 
+  {%- if s.who_its_for.show %}
   <section class="band section" style="padding-top:0" aria-labelledby="who-title">
     <div class="wrap">
-      <div class="rule" style="margin-bottom:clamp(64px,9vw,128px)"></div>
+      {%- if s.how_it_works.show %}<div class="rule" style="margin-bottom:clamp(64px,9vw,128px)"></div>{% endif %}
       <div class="section-head">
-        <span class="label">Who we make films for</span>
-        <h2 id="who-title">If you have a story and a crowd, we're in.</h2>
+        <span class="label">{{ s.who_its_for.eyebrow | escape }}</span>
+        <h2 id="who-title">{{ s.who_its_for.heading | markdownify | remove: '<p>' | remove: '</p>' | strip }}</h2>
       </div>
       <div class="cards">
+        {%- for card in s.who_its_for.cards %}
         <article class="card">
-          <span class="label">For businesses</span>
-          <h3>Small &amp; medium businesses</h3>
-          <p>Show the people behind the counter. A film and a launch night turn regulars into fans, and strangers into regulars.</p>
+          <span class="label">{{ card.label | escape }}</span>
+          <h3>{{ card.title | escape }}</h3>
+          <p>{{ card.text | escape }}</p>
         </article>
-        <article class="card">
-          <span class="label">For non-profits</span>
-          <h3>Non-profits</h3>
-          <p>Your impact is easier to feel than to explain in an annual report. Screen it for donors and volunteers and let the room do the talking.</p>
-        </article>
-        <article class="card">
-          <span class="label">For couples</span>
-          <h3>Wedding films</h3>
-          <p>Shot like a documentary: your voices, your families, the bits nobody rehearsed. Then a watch party, so everyone gets to relive it with you.</p>
-        </article>
+        {%- endfor %}
       </div>
     </div>
   </section>
+  {%- endif %}
 
+  {%- if s.watch_party.show %}
   <section class="band section party" aria-labelledby="party-title" style="padding-top:0">
     <div class="wrap">
       <div class="party-copy">
-        <span class="label">The watch party</span>
-        <h2 id="party-title">The premiere is the <em>point</em>.</h2>
-        <p>A film sitting in a Google Drive folder doesn't do much. The same film on a big screen, with your community in the room, starts conversations, gets shared, and brings people back. We run the screening so you get to enjoy it.</p>
+        <span class="label">{{ s.watch_party.eyebrow | escape }}</span>
+        <h2 id="party-title">{{ s.watch_party.heading | markdownify | remove: '<p>' | remove: '</p>' | strip }}</h2>
+        <p>{{ s.watch_party.text | escape }}</p>
       </div>
-      <div class="ticket" role="img" aria-label="Ticket: Admit all. World premiere of your film.">
+      <div class="ticket" role="img" aria-label="Ticket: {{ s.watch_party.ticket_headline | escape }}. {{ s.watch_party.ticket_stub | escape }}.">
         <div class="main">
-          <span class="label">WSTWND presents</span>
-          <span class="admit">ADMIT ALL</span>
+          <span class="label">{{ s.watch_party.ticket_top | escape }}</span>
+          <span class="admit">{{ s.watch_party.ticket_headline | escape }}</span>
           <div class="rows label">
-            <span>Film</span><span>Yours</span>
-            <span>Seats</span><span>Everyone</span>
-            <span>Date</span><span>You pick</span>
+            {%- for row in s.watch_party.ticket_rows %}
+            <span>{{ row.label | escape }}</span><span>{{ row.value | escape }}</span>
+            {%- endfor %}
           </div>
         </div>
-        <div class="stub"><span class="label">World premiere</span></div>
+        <div class="stub"><span class="label">{{ s.watch_party.ticket_stub | escape }}</span></div>
       </div>
     </div>
   </section>
+  {%- endif %}
 
   <section class="band dark contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
@@ -265,16 +265,16 @@ p { margin: 0; max-width: 62ch; }
         <rect x="320" y="648.5" width="560" height="14" fill="#F5EBDD"/>
         <text x="278" y="845" font-family="Fraunces, serif" font-weight="300" font-size="138" fill="#F5EBDD" textLength="644" lengthAdjust="spacing" style="font-variation-settings:'opsz' 144">WSTWND</text>
       </svg>
-      <h2 id="contact-title">Let's make something <em>worth</em> watching.</h2>
-      <p class="lede">Email us with who you are, who your people are, and what you have in mind. A couple of lines is plenty.</p>
+      <h2 id="contact-title">{{ s.contact.heading | markdownify | remove: '<p>' | remove: '</p>' | strip }}</h2>
+      <p class="lede">{{ s.contact.text | escape }}</p>
       <div class="mail">
-        <span class="addr" id="addr">wstwndcreative@gmail.com</span>
-        <button class="btn ghost" type="button" id="copy">Copy email</button>
+        <span class="addr" id="addr">{{ s.contact.email | escape }}</span>
+        <button class="btn ghost" type="button" id="copy" data-copied="{{ s.contact.copied_message | escape }}">{{ s.contact.copy_button | escape }}</button>
       </div>
       <p class="label copied" id="copied" aria-live="polite"></p>
       <div class="foot label">
-        <span>© 2026 WSTWND Creative</span>
-        <span>Films + watch parties</span>
+        <span>{{ s.contact.footer_left | escape }}</span>
+        <span>{{ s.contact.footer_right | escape }}</span>
       </div>
     </div>
   </section>
@@ -297,12 +297,11 @@ p { margin: 0; max-width: 62ch; }
   function selectAddr() { var r = document.createRange(); r.selectNodeContents(addr); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
   copyBtn.addEventListener('click', function () {
     var text = addr.textContent.trim();
-    var done = function () { note.textContent = 'Copied. Talk soon.'; };
+    var done = function () { note.textContent = copyBtn.getAttribute('data-copied'); };
     var fail = function () { selectAddr(); note.textContent = 'Selected. Press Ctrl+C or Cmd+C to copy.'; };
     try { navigator.clipboard.writeText(text).then(done, fail); } catch (e) { fail(); }
   });
 })();
 </script>
-
 </body>
 </html>

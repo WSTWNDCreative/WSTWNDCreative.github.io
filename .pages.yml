@@ -1,0 +1,114 @@
+media:
+  input: media
+  output: /media
+
+content:
+  - name: landing
+    label: Landing page
+    type: file
+    path: _data/site.yml
+    format: yaml
+    fields:
+      - name: page
+        label: Page details (browser tab and link previews)
+        type: object
+        fields:
+          - { name: title, label: Page title, type: string }
+          - { name: description, label: Short description for search and link previews, type: text }
+
+      - name: header
+        label: Top bar
+        type: object
+        fields:
+          - { name: tag, label: Small label (top left), type: string }
+          - { name: link_label, label: Contact link (top right), type: string }
+
+      - name: hero
+        label: Hero (top of the page)
+        type: object
+        fields:
+          - { name: eyebrow, label: Small label above the headline, type: string }
+          - { name: headline, label: "Headline (wrap one word in *asterisks* for italics)", type: string }
+          - { name: intro, label: Intro paragraph, type: text }
+          - { name: primary_button, label: Main button text (goes to contact), type: string }
+          - { name: secondary_button, label: Second button text (goes to How it works), type: string }
+          - name: reel_video
+            label: Reel video (vertical MP4, keep it small, under ~5 MB)
+            type: file
+            options:
+              categories: [video]
+          - { name: reel_poster, label: Reel cover image (shown before the video plays), type: image }
+          - { name: reel_label, label: Caption under the reel, type: string }
+          - { name: reel_description, label: Reel description for screen readers, type: text }
+
+      - name: how_it_works
+        label: How it works
+        type: object
+        fields:
+          - { name: show, label: Show this section, type: boolean }
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: "Heading (*asterisks* for italics)", type: string }
+          - name: steps
+            label: Steps (numbered automatically, in this order)
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{index}. {title}"
+            fields:
+              - { name: title, label: Step title, type: string }
+              - { name: text, label: Step description, type: text }
+          - { name: closing, label: Closing line (leave empty to hide), type: string }
+
+      - name: who_its_for
+        label: Who it's for
+        type: object
+        fields:
+          - { name: show, label: Show this section, type: boolean }
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: "Heading (*asterisks* for italics)", type: string }
+          - name: cards
+            label: Cards
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - { name: label, label: Small label, type: string }
+              - { name: title, label: Card title, type: string }
+              - { name: text, label: Card text, type: text }
+
+      - name: watch_party
+        label: Watch party
+        type: object
+        fields:
+          - { name: show, label: Show this section, type: boolean }
+          - { name: eyebrow, label: Small label, type: string }
+          - { name: heading, label: "Heading (*asterisks* for italics)", type: string }
+          - { name: text, label: Paragraph, type: text }
+          - { name: ticket_top, label: Ticket top line, type: string }
+          - { name: ticket_headline, label: Ticket big text, type: string }
+          - { name: ticket_stub, label: Ticket stub (sideways text), type: string }
+          - name: ticket_rows
+            label: Ticket rows
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}: {value}"
+            fields:
+              - { name: label, label: Label, type: string }
+              - { name: value, label: Value, type: string }
+
+      - name: contact
+        label: Contact (dark section at the bottom)
+        type: object
+        fields:
+          - { name: heading, label: "Heading (*asterisks* for italics)", type: string }
+          - { name: text, label: Paragraph, type: text }
+          - { name: email, label: Email address, type: string }
+          - { name: copy_button, label: Copy button text, type: string }
+          - { name: copied_message, label: Message after copying, type: string }
+          - { name: footer_left, label: Footer left, type: string }
+          - { name: footer_right, label: Footer right, type: string }
