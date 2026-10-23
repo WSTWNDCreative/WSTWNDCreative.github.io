@@ -4,7 +4,7 @@
 
 page:
   title: WSTWND Creative
-  description: Documentary-style films for small businesses, non-profits and couples, followed by a watch party for your people.
+  description: We make documentary-style films for small businesses, non-profits and couples, then host watch parties with your community.
 
 header:
   tag: Films + watch parties
@@ -12,8 +12,8 @@ header:
 
 hero:
   eyebrow: WSTWND Creative
-  headline: We film your people. Then we *throw* the premiere.
-  intro: Documentary-style films for small businesses, non-profits and couples, followed by a watch party that puts everyone you care about in one room. Popcorn optional. Happy tears likely.
+  headline: First we make the film, then we *host* the premiere.
+  intro: Documentary-style films for small businesses, non-profits and couples, followed by a watch party that puts everyone you care about in one room. Popcorn's a must. 
   primary_button: Start a film
   secondary_button: How it works
   reel_video: /media/reel.mp4
@@ -27,7 +27,7 @@ how_it_works:
   heading: Two parts. One very good night.
   steps:
     - title: We film it
-      text: We spend time with you and your people, in your space. Interviews, natural sound, the moments nobody planned. No stock smiles, no teleprompter. The story comes from the people telling it.
+      text: We spend time understanding you/your organization, in your space. 
     - title: We host the watch party
       text: "Then we premiere it. We set up the screen and the room, and you invite the people who matter: customers, donors, family, and the neighbour who keeps asking what it is you actually do."
   closing: You keep the film. Your community keeps talking about the night.
@@ -39,7 +39,7 @@ who_its_for:
   cards:
     - label: For businesses
       title: Small & medium businesses
-      text: Show the people behind the counter. A film and a launch night turn regulars into fans, and strangers into regulars.
+      text: Celebrate the people behind the scenes. A film and a launch night turn regulars into fans, and strangers into regulars.
     - label: For non-profits
       title: Non-profits
       text: Your impact is easier to feel than to explain in an annual report. Screen it for donors and volunteers and let the room do the talking.
